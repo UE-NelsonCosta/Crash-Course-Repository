@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f28d42120d4ba44882e5aa6052a09ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanSpawn: 0
+  CanSpawn: 1
   PrefabToSpawn: {fileID: 1347907272301784384}
 --- !u!114 &1885495673201421333
 MonoBehaviour:

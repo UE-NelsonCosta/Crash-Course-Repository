@@ -5,6 +5,8 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float MovementVelocity = 2.0f;
     [SerializeField] private float JumpForce = 5.0f;
 
+    private Transform cameraTransform = null;
+
     private bool IsGrounded = true;
     
     private Rigidbody myRigidbody = null;
@@ -12,6 +14,8 @@ public class CharacterMovement : MonoBehaviour
     private void Start()
     {
         myRigidbody = GetComponent<Rigidbody>();
+
+        cameraTransform = Camera.main.transform;
     }
 
     private void Update()
@@ -21,11 +25,13 @@ public class CharacterMovement : MonoBehaviour
         float VerticalAxis = Input.GetAxis("Vertical");
         float HorizontalAxis = Input.GetAxis("Horizontal");
 
+        Vector3 Direction = cameraTransform.InverseTransformDirection(new Vector3(HorizontalAxis, VerticalAxis, 0));
+        
         myRigidbody.velocity = new Vector3
             (
-                HorizontalAxis * MovementVelocity,
+                Direction.x * MovementVelocity,
                 myRigidbody.velocity.y,
-                VerticalAxis * MovementVelocity
+                Direction.y * MovementVelocity
             );
 
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
